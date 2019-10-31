@@ -1,4 +1,5 @@
 use core::ops::{Deref, DerefMut};
+#[cfg(feature = "stm32f4xx-hal")]
 use stm32f4xx_hal::stm32::ETHERNET_DMA;
 
 use crate::{
@@ -172,7 +173,7 @@ impl<'a> TxRing<'a> {
             }
             previous.map(|previous| previous.setup(None));
         }
-        
+
         let ring_ptr = self.entries[0].desc() as *const TxDescriptor;
         // Register TxDescriptor
         eth_dma.dmatdlar.write(|w| {

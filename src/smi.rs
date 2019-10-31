@@ -1,3 +1,4 @@
+#[cfg(feature = "stm32f4xx-hal")]
 use stm32f4xx_hal::stm32::ethernet_mac::{MACMIIAR, MACMIIDR};
 
 /// Station Management Interface

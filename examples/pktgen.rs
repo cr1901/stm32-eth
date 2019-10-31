@@ -9,6 +9,8 @@ use core::default::Default;
 
 use cortex_m::asm;
 use cortex_m::interrupt::Mutex;
+
+#[cfg(feature = "stm32f4xx-hal")]
 use stm32f4xx_hal::{
     gpio::GpioExt,
     stm32::{Peripherals, CorePeripherals, SYST, interrupt},

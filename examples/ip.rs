@@ -5,6 +5,7 @@ extern crate panic_itm;
 
 use cortex_m::asm;
 use cortex_m_rt::{entry, exception};
+#[cfg(feature = "stm32f4xx-hal")]
 use stm32f4xx_hal::{
     gpio::GpioExt,
     stm32::{Peripherals, CorePeripherals, SYST, interrupt},
@@ -53,7 +54,7 @@ static ETH_PENDING: Mutex<RefCell<bool>> = Mutex::new(RefCell::new(false));
 fn main() -> ! {
     unsafe { log::set_logger(&LOGGER).unwrap(); }
     log::set_max_level(LevelFilter::Info);
-    
+
     let mut stdout = hio::hstdout().unwrap();
 
     let p = Peripherals::take().unwrap();

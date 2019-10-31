@@ -1,5 +1,6 @@
 use core::ops::Deref;
 use core::default::Default;
+#[cfg(feature = "stm32f4xx-hal")]
 use stm32f4xx_hal::stm32::ETHERNET_DMA;
 
 use crate::{
@@ -145,7 +146,7 @@ pub struct RxPacket<'a> {
 
 impl<'a> Deref for RxPacket<'a> {
     type Target = [u8];
-    
+
     fn deref(&self) -> &Self::Target {
         &self.entry.as_slice()[0..self.length]
     }

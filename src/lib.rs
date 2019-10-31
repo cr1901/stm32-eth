@@ -1,9 +1,12 @@
 #![no_std]
 
 /// Re-export
+#[cfg(feature = "stm32f4xx-hal")]
 pub use stm32f4xx_hal as hal;
 /// Re-export
+#[cfg(feature = "stm32f4xx-hal")]
 pub use stm32f4xx_hal::stm32;
+#[cfg(feature = "stm32f4xx-hal")]
 use stm32f4xx_hal::stm32::{ETHERNET_MAC, ETHERNET_DMA, NVIC, Interrupt};
 
 pub mod phy;
