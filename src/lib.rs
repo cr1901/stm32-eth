@@ -1,13 +1,21 @@
 #![no_std]
 
-/// Re-export
 #[cfg(feature = "stm32f4xx-hal")]
+/// Re-export
 pub use stm32f4xx_hal as hal;
+#[cfg(feature = "stm32f7xx-hal")]
 /// Re-export
+pub use stm32f7xx_hal as hal;
 #[cfg(feature = "stm32f4xx-hal")]
+/// Re-export
 pub use stm32f4xx_hal::stm32;
+#[cfg(feature = "stm32f7xx-hal")]
+/// Re-export
+pub use stm32f7xx_hal::device as stm32;
 #[cfg(feature = "stm32f4xx-hal")]
 use stm32f4xx_hal::stm32::{ETHERNET_MAC, ETHERNET_DMA, NVIC, Interrupt};
+#[cfg(feature = "stm32f7xx-hal")]
+use stm32f7xx_hal::device::{ETHERNET_MAC, ETHERNET_DMA, NVIC, Interrupt};
 
 pub mod phy;
 use phy::{Phy, PhyStatus};
@@ -23,7 +31,7 @@ use tx::{TxRing, TxRingEntry};
 pub use tx::{TxDescriptor, TxError};
 mod setup;
 pub use setup::setup;
-#[cfg(feature = "nucleo-f429zi")]
+#[cfg(any(feature = "nucleo-f429zi", feature = "nucleo-f746zg"))]
 pub use setup::setup_pins;
 
 #[cfg(feature = "smoltcp-phy")]

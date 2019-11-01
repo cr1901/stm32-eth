@@ -10,6 +10,11 @@ use stm32f4xx_hal::{
     gpio::GpioExt,
     stm32::{Peripherals, CorePeripherals, SYST, interrupt},
 };
+#[cfg(feature = "stm32f7xx-hal")]
+use stm32f7xx_hal::{
+    gpio::GpioExt,
+    device::{Peripherals, CorePeripherals, SYST, interrupt},
+};
 
 use core::cell::RefCell;
 use cortex_m::interrupt::Mutex;
@@ -81,7 +86,7 @@ fn main() -> ! {
     );
     eth.enable_interrupt(&mut cp.NVIC);
 
-    let local_addr = Ipv4Address::new(10, 0, 0, 1);
+    let local_addr = Ipv4Address::new(192, 168, 1, 182);
     let ip_addr = IpCidr::new(IpAddress::from(local_addr), 24);
     let mut ip_addrs = [ip_addr];
     let mut neighbor_storage = [None; 16];

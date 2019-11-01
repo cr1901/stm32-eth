@@ -1,6 +1,8 @@
 use core::option::Option;
 #[cfg(feature = "stm32f4xx-hal")]
 use stm32f4xx_hal::stm32::ethernet_mac::{MACMIIAR, MACMIIDR};
+#[cfg(feature = "stm32f7xx-hal")]
+use stm32f7xx_hal::device::ethernet_mac::{MACMIIAR, MACMIIDR};
 
 use crate::smi::SMI;
 

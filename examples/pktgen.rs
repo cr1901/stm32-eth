@@ -16,6 +16,12 @@ use stm32f4xx_hal::{
     stm32::{Peripherals, CorePeripherals, SYST, interrupt},
 };
 
+#[cfg(feature = "stm32f7xx-hal")]
+use stm32f7xx_hal::{
+    gpio::GpioExt,
+    device::{Peripherals, CorePeripherals, SYST, interrupt},
+};
+
 use core::fmt::Write;
 use cortex_m_semihosting::hio;
 
@@ -151,6 +157,8 @@ fn main() -> ! {
                     buf[12..14].copy_from_slice(&ETH_TYPE);
                 });
 
+                //writeln!(stdout, "loop").unwrap();
+
                 match r {
                     Ok(()) => {
                         tx_bytes += SIZE;
@@ -160,6 +168,8 @@ fn main() -> ! {
                 }
             }
         }
+
+        writeln!(stdout, "next").unwrap();
 
         cortex_m::interrupt::free(|cs| {
             let eth_pending =
